@@ -1,0 +1,325 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Design Tokens — Dossier Maestro Cap. 29 + Blueprint Cap. 3
+   Fuente de verdad única. No aproximar estos valores en componentes.
+   ========================================================================== */
+
+:root {
+  /* ---- 29.1 Color ---- */
+  --bg-primary: #0b0b0d;
+  --bg-secondary: #131316;
+  --bg-elevated: #1a1a1f;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-visible: rgba(255, 255, 255, 0.14);
+
+  --text-primary: #f5f5f4;
+  --text-secondary: #b4b8c2;
+  --text-tertiary: #6e7178;
+  --text-disabled: #45464c;
+
+  --accent: #5b8cff;
+  --accent-deep: #2f4b8c;
+  --accent-light: #8fb0ff;
+  --accent-glow: rgba(91, 140, 255, 0.35);
+
+  --gradient-primary: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent-light) 100%);
+
+  --noise-opacity: 0.035;
+
+  /* ---- 29.2 Tipografía ---- */
+  --font-sans: var(--font-geist-sans), "Inter", -apple-system, sans-serif;
+  --font-serif: var(--font-instrument-serif), "Cormorant Garamond", serif;
+
+  /* ---- 29.3 Espaciado ---- */
+  --space-2xs: 4px;
+  --space-xs: 8px;
+  --space-s: 16px;
+  --space-m: 24px;
+  --space-l: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 160px;
+
+  /* ---- 29.4 Grid y layout ---- */
+  --container-max: 1440px;
+  --grid-gutter: 24px;
+  --margin-desktop: max(64px, 5vw);
+  --margin-tablet: 32px;
+  --margin-mobile: 20px;
+
+  /* ---- 29.5 Border radius ---- */
+  --radius-button: 10px;
+  --radius-input: 10px;
+  --radius-card: 20px;
+  --radius-pill: 999px;
+
+  /* ---- 29.6 Motion ---- */
+  --duration-micro: 200ms;
+  --duration-hover: 250ms;
+  --duration-reveal: 650ms;
+  --duration-reveal-major: 1000ms;
+  --duration-narrative: 1300ms;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- 29.7 Breakpoints y z-index ---- */
+  --bp-mobile: 767px;
+  --bp-tablet: 1279px;
+  --bp-desktop: 1280px;
+
+  --z-base: 0;
+  --z-content: 10;
+  --z-navbar: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-tooltip: 400;
+}
+
+/* Mapeo a Tailwind v4 (CSS-first, sin tailwind.config.js) */
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-elevated: var(--bg-elevated);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border-visible: var(--border-visible);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-light: var(--accent-light);
+  --color-accent-glow: var(--accent-glow);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  --radius-button: var(--radius-button);
+  --radius-input: var(--radius-input);
+  --radius-card: var(--radius-card);
+  --radius-pill: var(--radius-pill);
+
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1280px;
+}
+
+/* ==========================================================================
+   Reset base
+   IMPORTANTE: todo va dentro de @layer base. Tailwind v4 envuelve sus
+   utilidades en @layer utilities; una regla de CSS plano fuera de cualquier
+   @layer se considera "sin capa" y el algoritmo de cascade layers la sitúa
+   SIEMPRE por encima de cualquier capa con nombre, sin importar
+   especificidad ni orden — así, un simple `a { color: inherit }` sin capa
+   ganaría siempre a clases como `text-accent`, dejando enlaces con el color
+   heredado en vez del que pide la utilidad (mismo síntoma que el bug de
+   tailwind-merge del Cap. 8: texto con el color equivocado, sin error en
+   consola). Declarar todo dentro de @layer base evita este problema.
+   ========================================================================== */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    background: var(--bg-primary);
+    color-scheme: dark;
+  }
+
+  body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Textura de ruido única, imperceptible — Cap. 22.7 */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-base);
+    pointer-events: none;
+    opacity: var(--noise-opacity);
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--accent-glow);
+    color: var(--text-primary);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   Escala tipográfica utilitaria — Cap. 8 (regla obligatoria)
+   Prefijo `type-` (NUNCA `text-`): si conviviera con utilidades de color
+   `text-*` de Tailwind dentro de un cn() con tailwind-merge, tailwind-merge
+   las agruparía por prefijo y descartaría una clase en silencio (texto
+   invisible sin error en consola). Ver Blueprint Cap. 8.
+   Declaradas en @layer components: por debajo de @layer utilities, para que
+   cualquier utilidad real de Tailwind (p. ej. text-accent) siga ganando
+   cuando conviva con estas clases en el mismo elemento.
+   ========================================================================== */
+
+@layer components {
+  .type-display-xl {
+    font-family: var(--font-sans);
+    font-size: 6rem;
+    font-weight: 600;
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+  }
+
+  .type-display-l {
+    font-family: var(--font-sans);
+    font-size: 4.5rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .type-h1 {
+    font-family: var(--font-sans);
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  .type-h2 {
+    font-family: var(--font-sans);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .type-h3 {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .type-h4 {
+    font-family: var(--font-sans);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  .type-lead {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .type-body-lg {
+    font-family: var(--font-sans);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .type-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .type-small {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  .type-caption {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+  }
+
+  .type-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .type-label {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+  }
+
+  .type-button {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  /* Voz emocional — Instrument Serif itálica, solo palabras clave */
+  .type-editorial {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Redefinir (no reducir proporcionalmente) en mobile — Cap. 29.2 */
+  @media (max-width: 767px) {
+    .type-display-xl {
+      font-size: 3rem;
+    }
+    .type-display-l {
+      font-size: 2.5rem;
+    }
+    .type-h1 {
+      font-size: 2.25rem;
+    }
+    .type-h2 {
+      font-size: 1.75rem;
+    }
+  }
+}
