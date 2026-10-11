@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import {
-  ChevronDown,
   GitMerge,
   Layers,
   MessageCircle,
@@ -19,12 +18,15 @@ import { cn } from "@/lib/utils";
 
 /**
  * Capacidades del Sistema — Dossier Cap. 11 + Anexo B / Blueprint 4.4.
- * Siete capacidades (la séptima añadida por el Anexo B).
  *
- * Lista de acordeón en vez de siete bloques a pantalla completa: la misma
- * profundidad (problema → beneficio → resultado) sigue disponible, pero
- * bajo demanda, no forzando el scroll — Servicios ya da la vista rápida,
- * esta sección es la capa de profundidad para quien quiera abrirla.
+ * Diagrama radial: la empresa en el centro, las siete capacidades
+ * alrededor — sustituye al acordeón vertical (demasiado texto, demasiado
+ * alto) por un único gráfico interactivo. Misma geometría en todos los
+ * tamaños (nunca se abandona la metáfora "todo rodea a tu empresa"): en
+ * pantallas estrechas los nodos pierden la etiqueta de texto (serían
+ * ilegibles a ese radio) y quedan solo como icono, con el nombre
+ * accesible por aria-label y visible igualmente en el panel central al
+ * seleccionarlos.
  */
 const ICONS: Record<string, LucideIcon> = {
   "responde-sola": MessageCircle,
@@ -36,93 +38,108 @@ const ICONS: Record<string, LucideIcon> = {
   "herramienta-a-medida": Puzzle,
 };
 
-type Capability = (typeof capabilities.items)[number];
+const ITEMS = capabilities.items;
+const COUNT = ITEMS.length;
+const RADIUS = 40;
+
+function nodePosition(index: number) {
+  const angle = (index / COUNT) * Math.PI * 2 - Math.PI / 2;
+  return {
+    x: 50 + RADIUS * Math.cos(angle),
+    y: 50 + RADIUS * Math.sin(angle),
+  };
+}
 
 export function Capabilities() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = ITEMS[activeIndex];
+  const panelId = useId();
+
   return (
     <section id="capacidades" className="relative bg-bg-primary py-[var(--space-2xl)]">
-      <Container className="flex flex-col gap-[var(--space-xl)]">
-        <Reveal>
+      <Container className="flex flex-col items-center gap-[var(--space-xl)]">
+        <Reveal className="w-full">
           <h2 className="type-h1 max-w-2xl text-text-primary">{capabilities.sectionTitle}</h2>
         </Reveal>
 
-        <Reveal>
-          <div className="flex flex-col divide-y divide-border-subtle border-y border-border-subtle">
-            {capabilities.items.map((capability) => (
-              <CapabilityRow key={capability.id} capability={capability} />
-            ))}
+        <Reveal className="w-full">
+          <div className="relative mx-auto aspect-square w-full max-w-[600px]">
+            <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
+              {ITEMS.map((item, i) => {
+                const { x, y } = nodePosition(i);
+                const isActive = i === activeIndex;
+                return (
+                  <line
+                    key={item.id}
+                    x1={50}
+                    y1={50}
+                    x2={x}
+                    y2={y}
+                    stroke={isActive ? "var(--accent)" : "var(--border-visible)"}
+                    strokeWidth={isActive ? 0.4 : 0.2}
+                    className="transition-[stroke,stroke-width] duration-[var(--duration-hover)]"
+                  />
+                );
+              })}
+            </svg>
+
+            <div
+              id={panelId}
+              role="status"
+              aria-live="polite"
+              className="absolute left-1/2 top-1/2 flex w-[56%] -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[var(--space-2xs)] rounded-card border border-border-visible bg-bg-secondary px-[var(--space-m)] py-[var(--space-m)] text-center"
+            >
+              <span className="type-eyebrow text-accent">Tu empresa</span>
+              <p className="type-label text-text-primary tablet:hidden">{active.title}</p>
+              <p className="type-h4 hidden text-text-primary tablet:block">{active.title}</p>
+              <p className="type-caption hidden text-text-secondary tablet:block">{active.description}</p>
+            </div>
+
+            {ITEMS.map((item, i) => {
+              const { x, y } = nodePosition(i);
+              const Icon = ICONS[item.id] ?? Workflow;
+              const isActive = i === activeIndex;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-pressed={isActive}
+                  aria-controls={panelId}
+                  aria-label={item.title}
+                  onClick={() => setActiveIndex(i)}
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                  className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-[var(--space-2xs)]"
+                >
+                  <span
+                    className={cn(
+                      "flex h-10 w-10 items-center justify-center rounded-full border bg-bg-elevated transition-colors duration-[var(--duration-hover)] tablet:h-12 tablet:w-12",
+                      isActive ? "border-accent" : "border-border-visible"
+                    )}
+                  >
+                    <Icon
+                      className={cn("h-4 w-4 tablet:h-5 tablet:w-5", isActive ? "text-accent" : "text-text-tertiary")}
+                      strokeWidth={1.5}
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <span
+                    className={cn(
+                      "type-caption hidden max-w-[7rem] text-center tablet:block",
+                      isActive ? "text-text-primary" : "text-text-tertiary"
+                    )}
+                  >
+                    {item.title}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </Reveal>
 
-        <Reveal>
+        <Reveal className="w-full">
           <p className="type-h4 max-w-2xl text-text-secondary">{capabilities.closingStatement}</p>
         </Reveal>
       </Container>
     </section>
-  );
-}
-
-function CapabilityRow({ capability }: { capability: Capability }) {
-  const [open, setOpen] = useState(false);
-  const Icon = ICONS[capability.id] ?? Workflow;
-  const panelId = `capability-panel-${capability.id}`;
-  const buttonId = `capability-trigger-${capability.id}`;
-
-  return (
-    <div>
-      <button
-        id={buttonId}
-        type="button"
-        aria-expanded={open}
-        aria-controls={panelId}
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center gap-[var(--space-m)] py-[var(--space-m)] text-left"
-      >
-        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-border-visible bg-bg-elevated">
-          <Icon className="h-4 w-4 text-accent" strokeWidth={1.5} aria-hidden="true" />
-        </span>
-        <span className="flex-1">
-          <span className="type-h4 block text-text-primary">{capability.title}</span>
-          <span className="type-small mt-[2px] block text-text-secondary">{capability.description}</span>
-        </span>
-        <ChevronDown
-          className={cn(
-            "h-4 w-4 shrink-0 text-text-tertiary transition-transform duration-[var(--duration-hover)]",
-            open && "rotate-180"
-          )}
-          aria-hidden="true"
-        />
-      </button>
-
-      <div
-        className="grid transition-[grid-template-rows] duration-[var(--duration-reveal)] ease-[var(--ease-out-soft)]"
-        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
-      >
-        <div
-          id={panelId}
-          role="region"
-          aria-labelledby={buttonId}
-          className={cn(
-            "overflow-hidden transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-out-soft)]",
-            open ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <dl className="grid gap-[var(--space-s)] pb-[var(--space-m)] desktop:grid-cols-3 desktop:pl-[3.25rem]">
-            <div>
-              <dt className="type-label text-text-tertiary">Problema</dt>
-              <dd className="type-small mt-[var(--space-2xs)] text-text-secondary">{capability.problem}</dd>
-            </div>
-            <div>
-              <dt className="type-label text-text-tertiary">Beneficio</dt>
-              <dd className="type-small mt-[var(--space-2xs)] text-text-secondary">{capability.benefit}</dd>
-            </div>
-            <div>
-              <dt className="type-label text-text-tertiary">Resultado</dt>
-              <dd className="type-small mt-[var(--space-2xs)] text-text-secondary">{capability.result}</dd>
-            </div>
-          </dl>
-        </div>
-      </div>
-    </div>
   );
 }

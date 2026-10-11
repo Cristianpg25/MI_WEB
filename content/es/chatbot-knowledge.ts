@@ -25,30 +25,23 @@ export function buildKnowledgeBase(): string {
     .map((p, i) => `${i + 1}. ${p.title} ${p.description}`)
     .join("\n");
 
-  const guaranteesBlock = trust.guarantees.items.map((g) => `- ${g}`).join("\n");
+  const trustBlock = trust.pills.map((p) => `- ${p}`).join("\n");
 
-  const objectionsBlock = trust.objections.items
+  const objectionsBlock = trust.objections
     .map((o) => `P: ${o.question}\nR: ${o.answer}`)
     .join("\n\n");
 
-  const casesBlock = cases.items
-    .map((c) => {
-      const stepsText = c.steps.map((s) => `   - ${s.title}: ${s.detail}`).join("\n");
-      const statsText = c.stats.map((s) => `${s.value} ${s.label}`).join(" · ");
-      return `Caso — ${c.tag}\nQuiénes eran: ${c.intro}\nAntes: ${c.before}\nQué hicimos:\n${stepsText}\nResultados: ${statsText}\nQué permitió: ${c.outcome}`;
-    })
-    .join("\n\n");
+  const casesBlock = `Ejemplo ilustrativo (no es un caso real de cliente, es una ilustración del tipo de coste que resolvemos): ${cases.intro} Cifras ilustrativas: ${cases.stats
+    .map((s) => `${s.value} ${s.label}`)
+    .join(" · ")}. ${cases.outcome}`;
 
   return [
     `## Servicios que ofrecemos\n${servicesBlock}`,
     `## Las siete capacidades del sistema\n${capabilitiesBlock}`,
     `## Cierre de capacidades\n${capabilities.closingStatement}`,
     `## Metodología de trabajo (cinco fases)\n${methodologyBlock}`,
-    `## Transparencia\n${trust.transparency.text}`,
-    `## Cómo medimos el éxito\n${trust.measurement.text}`,
-    `## Garantías\n${guaranteesBlock}`,
-    `## Evidencia\n${trust.evidence.text}`,
+    `## Principios de confianza\n${trustBlock}`,
     `## Objeciones frecuentes ya resueltas en la web\n${objectionsBlock}`,
-    `## Casos de transformación reales publicados\n${casesBlock}`,
+    `## Ejemplo ilustrativo del coste de un proceso manual\n${casesBlock}`,
   ].join("\n\n");
 }

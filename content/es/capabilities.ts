@@ -6,7 +6,7 @@ export const capabilities = {
   items: [
     {
       id: "responde-sola",
-      title: "Tu empresa responde sola.",
+      title: "Responde sola",
       description:
         "Atención disponible a cualquier hora, sin que nadie tenga que estar delante de una pantalla para contestar.",
       problem:
@@ -17,7 +17,7 @@ export const capabilities = {
     },
     {
       id: "trabaja-sin-intervencion",
-      title: "Tu empresa trabaja aunque nadie esté delante del ordenador.",
+      title: "Trabaja sin intervención",
       description:
         "Los procesos avanzan solos: uno activa al siguiente sin intervención manual.",
       problem:
@@ -28,7 +28,7 @@ export const capabilities = {
     },
     {
       id: "informacion-unificada",
-      title: "Tu información deja de estar dispersa.",
+      title: "Información unificada",
       description:
         "Todo lo que hoy vive en programas separados empieza a hablar el mismo idioma.",
       problem:
@@ -39,7 +39,7 @@ export const capabilities = {
     },
     {
       id: "decide-con-informacion",
-      title: "Tu empresa decide con información.",
+      title: "Decide con información",
       description:
         "Los datos se organizan solos para que las decisiones se tomen más rápido y con más certeza.",
       problem:
@@ -50,7 +50,7 @@ export const capabilities = {
     },
     {
       id: "mas-visibilidad",
-      title: "Tu negocio aparece antes que tu competencia.",
+      title: "Más visible que tu competencia",
       description: "Más visibilidad, más oportunidades, sin depender de la suerte.",
       problem:
         "Un cliente potencial busca una solución y encuentra primero a otra empresa — no porque sea mejor, sino porque es más visible.",
@@ -59,7 +59,7 @@ export const capabilities = {
     },
     {
       id: "escala-sin-caos",
-      title: "Tu empresa escala sin aumentar el caos.",
+      title: "Escala sin aumentar el caos",
       description:
         "Puedes crecer, aceptar más trabajo y atender a más clientes sin que nada se rompa por el camino.",
       problem:
@@ -70,7 +70,7 @@ export const capabilities = {
     },
     {
       id: "herramienta-a-medida",
-      title: "Tu empresa deja de adaptarse al software, y empieza a tener el que necesita.",
+      title: "Software a tu medida",
       description:
         "Una herramienta pensada para tu equipo o tus clientes, adaptada a tu forma de trabajar en lugar de obligarte a adaptarte tú a ella.",
       problem:
