@@ -42,17 +42,17 @@ export function Services() {
           <p className="type-body-lg max-w-xl text-text-secondary">{services.subtitle}</p>
         </Reveal>
 
-        <div className="grid gap-[var(--space-s)] tablet:grid-cols-2 desktop:grid-cols-4">
+        <div className="grid gap-[var(--space-m)] tablet:grid-cols-2 desktop:grid-cols-3">
           {services.items.map((service, i) => {
             const Icon = ICONS[service.id] ?? Workflow;
             return (
               <Reveal key={service.id} delay={i * 0.06}>
-                <div className="flex h-full flex-col gap-[var(--space-s)] rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-m)] transition-colors duration-[var(--duration-hover)] hover:border-border-visible">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border-visible bg-bg-elevated">
-                    <Icon className="h-4 w-4 text-accent" strokeWidth={1.5} aria-hidden="true" />
+                <div className="flex h-full flex-col gap-[var(--space-m)] rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)] transition-colors duration-[var(--duration-hover)] hover:border-border-visible">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-border-visible bg-bg-elevated">
+                    <Icon className="h-5 w-5 text-accent" strokeWidth={1.5} aria-hidden="true" />
                   </div>
-                  <h3 className="type-h4 text-text-primary">{service.title}</h3>
-                  <p className="type-small text-text-secondary">{service.description}</p>
+                  <h3 className="type-h3 text-text-primary">{service.title}</h3>
+                  <p className="type-small text-text-tertiary">{service.description}</p>
                 </div>
               </Reveal>
             );

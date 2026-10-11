@@ -32,10 +32,11 @@ export function buildKnowledgeBase(): string {
     .join("\n\n");
 
   const casesBlock = cases.items
-    .map(
-      (c) =>
-        `Caso — ${c.sector}\nQuién era la empresa: ${c.company}\nQué estaba ocurriendo: ${c.whatWasHappening}\nQué cambió: ${c.whatChanged}\nResultado: ${c.result}\nQué permitió: ${c.whatItAllowed}`
-    )
+    .map((c) => {
+      const stepsText = c.steps.map((s) => `   - ${s.title}: ${s.detail}`).join("\n");
+      const statsText = c.stats.map((s) => `${s.value} ${s.label}`).join(" · ");
+      return `Caso — ${c.tag}\nQuiénes eran: ${c.intro}\nAntes: ${c.before}\nQué hicimos:\n${stepsText}\nResultados: ${statsText}\nQué permitió: ${c.outcome}`;
+    })
     .join("\n\n");
 
   return [

@@ -15,6 +15,4 @@ export const problem = {
   hourlyCostEUR: 25,
   closingText:
     "Todo este tiempo tiene un coste. Y ese coste ya lo está pagando tu empresa.",
-  estimateDisclaimer:
-    "Estimación ilustrativa a partir de un coste medio de 25 €/hora. No es un cálculo real sobre tu empresa.",
 } as const;

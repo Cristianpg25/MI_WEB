@@ -37,7 +37,11 @@ export function Hero() {
     <section
       id="hero"
       ref={sectionRef}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-bg-primary"
+      // pt reserva espacio para la navbar fija: sin esto, en viewports bajos
+      // (~700-760px, portátiles habituales) el titular queda pegado al
+      // header en vez de sentirse centrado — Cap. 25, probar en el caso
+      // más restrictivo, no en el más cómodo.
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-bg-primary pt-[var(--space-2xl)]"
     >
       <motion.div className="absolute inset-0" style={prefersReducedMotion ? undefined : { y: bgY }}>
         <NodeNetwork variant={variant} interactive />

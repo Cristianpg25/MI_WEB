@@ -141,7 +141,6 @@ export function Problem() {
                 {formatEUR(moneyValue)} al mes
               </span>
             </div>
-            <p className="type-caption text-text-tertiary">{problem.estimateDisclaimer}</p>
             <p
               className={cn(
                 "type-h4 max-w-lg pt-[var(--space-xs)] text-text-primary transition-opacity duration-[var(--duration-narrative)]",
