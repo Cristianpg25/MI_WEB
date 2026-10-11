@@ -67,7 +67,9 @@ function TransformationDesktop() {
   const translatePercent = effectiveProgress * (PHASES.length - 1) * 100;
 
   return (
-    <div ref={wrapperRef} className="relative" style={{ height: `${PHASES.length * 100}vh` }}>
+    // 55vh de scroll por fase (no 100vh): suficiente para sentir el
+    // desplazamiento horizontal sin alargar la página innecesariamente.
+    <div ref={wrapperRef} className="relative" style={{ height: `${PHASES.length * 55}vh` }}>
       <div ref={panelRef} className="sticky top-0 h-screen overflow-hidden">
         <div className="absolute inset-0 opacity-70">
           <NodeNetwork fromVariant="fragmenting" toVariant="stable" progress={effectiveProgress} />
@@ -113,7 +115,7 @@ function TransformationDesktop() {
 
 function TransformationMobile() {
   return (
-    <Container className="flex flex-col gap-[var(--space-2xl)] py-[var(--space-3xl)]">
+    <Container className="flex flex-col gap-[var(--space-2xl)] py-[var(--space-2xl)]">
       {PHASES.map((phase, i) => (
         <Reveal key={phase.id} delay={i * 0.05}>
           <div className="relative overflow-hidden rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)]">

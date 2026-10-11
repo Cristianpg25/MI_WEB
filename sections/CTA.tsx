@@ -19,7 +19,7 @@ export function CTA() {
   const prefersReducedMotion = usePrefersReducedMotion();
 
   return (
-    <section id="cta" className="relative overflow-hidden bg-bg-primary py-[var(--space-3xl)]">
+    <section id="cta" className="relative overflow-hidden bg-bg-primary py-[var(--space-2xl)]">
       <motion.div
         className="pointer-events-none absolute left-1/2 top-1/2 h-[60vh] w-[60vh] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{ background: "radial-gradient(circle, var(--accent-glow) 0%, transparent 70%)" }}

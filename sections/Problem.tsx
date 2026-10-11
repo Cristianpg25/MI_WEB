@@ -87,7 +87,7 @@ export function Problem() {
   const showClosing = effectiveProgress >= CLOSING_TEXT_START;
 
   return (
-    <section id="problema" ref={wrapperRef} className="relative h-[420vh] bg-bg-primary">
+    <section id="problema" ref={wrapperRef} className="relative h-[200vh] bg-bg-primary">
       <div ref={panelRef} className="sticky top-0 flex h-screen flex-col overflow-hidden">
         <div className="absolute inset-0">
           <NodeNetwork fromVariant="connected" toVariant="fragmenting" progress={effectiveProgress} />

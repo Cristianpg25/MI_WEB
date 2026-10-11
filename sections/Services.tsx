@@ -34,7 +34,7 @@ const ICONS: Record<string, LucideIcon> = {
 
 export function Services() {
   return (
-    <section id="servicios" className="relative bg-bg-primary py-[var(--space-3xl)]">
+    <section id="servicios" className="relative bg-bg-primary py-[var(--space-2xl)]">
       <Container className="flex flex-col gap-[var(--space-2xl)]">
         <Reveal className="flex flex-col gap-[var(--space-s)]">
           <Eyebrow>{services.eyebrow}</Eyebrow>

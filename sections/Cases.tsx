@@ -11,7 +11,7 @@ import { NodeNetwork } from "@/components/animations/NodeNetwork";
  */
 export function Cases() {
   return (
-    <section id="casos" className="relative bg-bg-primary py-[var(--space-3xl)]">
+    <section id="casos" className="relative bg-bg-primary py-[var(--space-2xl)]">
       <Container className="flex flex-col gap-[var(--space-2xl)]">
         <Reveal>
           <h2 className="type-h1 max-w-2xl text-text-primary">{cases.sectionTitle}</h2>

@@ -22,7 +22,7 @@ export function Methodology() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="metodologia" className="relative bg-bg-primary py-[var(--space-3xl)]">
+    <section id="metodologia" className="relative bg-bg-primary py-[var(--space-2xl)]">
       <Container className="flex flex-col gap-[var(--space-2xl)]">
         <Reveal>
           <h2 className="type-h1 max-w-2xl text-text-primary">{methodology.sectionTitle}</h2>

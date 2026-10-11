@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
  */
 export function Trust() {
   return (
-    <section id="confianza" className="relative bg-bg-primary py-[var(--space-3xl)]">
+    <section id="confianza" className="relative bg-bg-primary py-[var(--space-2xl)]">
       <Container className="flex flex-col gap-[var(--space-2xl)]">
         <Reveal>
           <h2 className="type-h1 max-w-2xl text-text-primary">{trust.sectionTitle}</h2>
