@@ -33,8 +33,8 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-[var(--z-navbar)] flex justify-center px-[var(--margin-mobile)] pt-[var(--space-s)] tablet:px-[var(--margin-tablet)] desktop:px-[var(--margin-desktop)]">
       <div
         className={cn(
-          "flex w-full max-w-[var(--container-max)] items-center justify-between rounded-pill border border-border-subtle bg-bg-secondary/70 backdrop-blur-md transition-[padding] duration-[var(--duration-hover)] ease-[var(--ease-standard)]",
-          scrolled ? "px-[var(--space-m)] py-[var(--space-2xs)]" : "px-[var(--space-l)] py-[var(--space-xs)]"
+          "flex w-full max-w-[var(--container-max)] origin-top items-center justify-between rounded-pill border border-border-subtle bg-bg-secondary/70 px-[var(--space-l)] py-[var(--space-xs)] backdrop-blur-md transition-transform duration-[var(--duration-hover)] ease-[var(--ease-standard)]",
+          scrolled && "scale-[0.96]"
         )}
       >
         <a href="#hero" className="type-label text-text-primary">

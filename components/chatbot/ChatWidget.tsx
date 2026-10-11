@@ -98,7 +98,7 @@ export function ChatWidget() {
           <motion.div
             role="dialog"
             aria-label={`Asistente de ${siteConfig.brandName}`}
-            className="flex h-[70vh] max-h-[560px] w-[92vw] max-w-sm flex-col overflow-hidden rounded-card border border-border-subtle bg-bg-secondary shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
+            className="flex h-[70vh] max-h-[560px] w-[92vw] max-w-sm origin-bottom-right flex-col overflow-hidden rounded-card border border-border-subtle bg-bg-secondary shadow-[0_20px_60px_rgba(0,0,0,0.5)]"
             initial={{ opacity: 0, y: 16, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.98 }}

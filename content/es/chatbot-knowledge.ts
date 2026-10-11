@@ -1,4 +1,5 @@
 import { capabilities } from "./capabilities";
+import { services } from "./services";
 import { methodology } from "./methodology";
 import { trust } from "./trust";
 import { cases } from "./cases";
@@ -11,6 +12,8 @@ import { cases } from "./cases";
  * que no exista ya en el Content Deck.
  */
 export function buildKnowledgeBase(): string {
+  const servicesBlock = services.items.map((s) => `- ${s.title}: ${s.description}`).join("\n");
+
   const capabilitiesBlock = capabilities.items
     .map(
       (c, i) =>
@@ -36,6 +39,7 @@ export function buildKnowledgeBase(): string {
     .join("\n\n");
 
   return [
+    `## Servicios que ofrecemos\n${servicesBlock}`,
     `## Las siete capacidades del sistema\n${capabilitiesBlock}`,
     `## Cierre de capacidades\n${capabilities.closingStatement}`,
     `## Metodología de trabajo (cinco fases)\n${methodologyBlock}`,

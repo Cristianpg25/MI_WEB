@@ -1,12 +1,10 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { trust } from "@/content/es/trust";
 import { Container, Eyebrow } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 /**
@@ -107,17 +105,28 @@ function Accordion({ question, answer, index }: { question: string; answer: stri
           aria-hidden="true"
         />
       </button>
-      <motion.div
-        id={panelId}
-        role="region"
-        aria-labelledby={buttonId}
-        initial={false}
-        animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
-        transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
-        className="overflow-hidden"
+      {/*
+        Técnica grid-template-rows (0fr → 1fr) en vez de animar `height` con
+        Framer Motion: evita forzar un layout/medición por frame y es
+        interrumpible — preferencia CSS > librería JS del skill de revisión
+        de animaciones (Emil Kowalski / Arsenal WEB TOP).
+      */}
+      <div
+        className="grid transition-[grid-template-rows] duration-[var(--duration-reveal)] ease-[var(--ease-out-soft)]"
+        style={{ gridTemplateRows: open ? "1fr" : "0fr" }}
       >
-        <p className="type-body pb-[var(--space-s)] text-text-secondary">{answer}</p>
-      </motion.div>
+        <div
+          id={panelId}
+          role="region"
+          aria-labelledby={buttonId}
+          className={cn(
+            "overflow-hidden transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-out-soft)]",
+            open ? "opacity-100" : "opacity-0"
+          )}
+        >
+          <p className="type-body pb-[var(--space-s)] text-text-secondary">{answer}</p>
+        </div>
+      </div>
     </div>
   );
 }
