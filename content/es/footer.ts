@@ -5,7 +5,6 @@ export const footer = {
     { label: "Capacidades", href: "#capacidades" },
     { label: "Casos", href: "#casos" },
     { label: "Cómo trabajamos", href: "#metodologia" },
-    { label: "Confianza", href: "#confianza" },
   ],
   legalLinks: [
     { label: "Aviso legal", href: "/aviso-legal" },

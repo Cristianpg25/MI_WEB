@@ -30,10 +30,16 @@ export const services = {
         "Conectamos tus herramientas para que cada proceso active al siguiente solo, sin que nadie tenga que empujarlo a mano.",
     },
     {
-      id: "integracion-sistemas",
-      title: "Integración de sistemas y datos",
+      id: "auditoria-negocio",
+      title: "Auditoría de negocio",
       description:
-        "Unificamos CRM, ERP, hojas de cálculo y correo en un único flujo, para que la información deje de duplicarse.",
+        "Revisamos tus procesos y herramientas actuales para detectar dónde se pierde tiempo y dinero, y qué automatizar primero para notarlo antes.",
+    },
+    {
+      id: "analisis-ecommerce",
+      title: "Análisis e-commerce",
+      description:
+        "Analizamos tu tienda online — tráfico, conversión, catálogo — para encontrar qué está frenando las ventas y cómo corregirlo.",
     },
     {
       id: "analisis-decisiones",
@@ -51,12 +57,6 @@ export const services = {
       id: "software-a-medida",
       title: "Software a medida",
       description: "Herramientas internas o de cara al cliente, construidas para tu forma de trabajar — no al revés.",
-    },
-    {
-      id: "arquitectura-escalable",
-      title: "Arquitectura de sistemas escalables",
-      description:
-        "Diseñamos para que tu empresa pueda crecer, aceptar más trabajo y atender a más clientes sin que nada se rompa por el camino.",
     },
     {
       id: "diseno-audiovisual",

@@ -1,9 +1,9 @@
 /**
- * Confianza — drásticamente reducido a petición directa del cliente: de
- * cinco bloques (transparencia, medición, garantías, evidencia,
- * objeciones) a un título + una fila de frases cortas. Sin acordeón, sin
- * párrafos. Las cuatro frases condensan lo más fuerte de cada bloque
- * anterior — ningún dato nuevo, solo mucho más corto.
+ * Confianza — la sección se eliminó por completo de la página a petición
+ * directa del cliente (alargaba la web sin aportar algo no cubierto ya en
+ * el resto del recorrido). Este contenido ya no se renderiza en ningún
+ * sitio: se conserva únicamente como base de conocimiento del chatbot, que
+ * puede seguir usándolo para resolver objeciones frecuentes.
  */
 export const trust = {
   sectionTitle: "Antes de escribirnos, esto es todo lo que necesitas saber.",
@@ -13,9 +13,6 @@ export const trust = {
     "Resultados medibles, no promesas",
     "Nunca desaparecemos después de la entrega",
   ],
-  // No se renderizan en la página (la sección ya no lleva acordeón) — se
-  // mantienen solo para que el chatbot pueda responder objeciones
-  // frecuentes con algo más de detalle que las cuatro frases de arriba.
   objections: [
     {
       question: "Ya uso varios programas.",

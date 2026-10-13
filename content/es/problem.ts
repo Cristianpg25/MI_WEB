@@ -12,7 +12,7 @@ export const problem = {
     { label: "Copiar datos entre programas", minutesPerDay: 20, tag: "Duplicado" },
   ],
   workingDaysPerMonth: 22,
-  hourlyCostEUR: 25,
+  hourlyCostEUR: 15,
   closingText:
     "Todo este tiempo tiene un coste. Y ese coste ya lo está pagando tu empresa.",
 } as const;

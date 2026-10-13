@@ -1,13 +1,15 @@
 import { services } from "@/content/es/services";
 import { Container, Eyebrow } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { ServiceFlipCard } from "@/components/ui/ServiceFlipCard";
 
 /**
- * Servicios — grid de tarjetas sin icono: título + línea divisoria fina +
- * descripción, cada tarjeta con fondo propio. Patrón tomado directamente
- * de cómo divisualproject.com estructura su sección de servicios (a
- * petición directa: "estudia como tiene las cards... y diseña algo muy
- * similar"), adaptado a nuestros 8 servicios y al Design System propio.
+ * Servicios — grid de 3 por fila, igual que divisualproject.com (a
+ * petición directa, con captura de referencia incluida). La cara frontal
+ * de cada tarjeta solo nombra el servicio; la descripción vive detrás y
+ * aparece al pulsar, con un giro 3D — así la vista general es tan rápida
+ * de escanear como la del sitio de referencia, y el detalle sigue a un
+ * clic de distancia para quien lo quiera.
  */
 export function Services() {
   return (
@@ -19,14 +21,10 @@ export function Services() {
           <p className="type-body-lg max-w-xl text-text-secondary">{services.subtitle}</p>
         </Reveal>
 
-        <div className="grid gap-[var(--space-xs)] tablet:grid-cols-2 desktop:grid-cols-4">
+        <div className="grid gap-[var(--space-m)] tablet:grid-cols-2 desktop:grid-cols-3">
           {services.items.map((service, i) => (
             <Reveal key={service.id} delay={i * 0.06}>
-              <div className="flex h-full flex-col gap-[var(--space-s)] bg-bg-secondary p-[var(--space-l)] transition-colors duration-[var(--duration-hover)] hover:bg-bg-elevated">
-                <h3 className="type-h4 uppercase tracking-wide text-text-primary">{service.title}</h3>
-                <span className="h-px w-10 bg-border-visible" aria-hidden="true" />
-                <p className="type-small text-text-tertiary">{service.description}</p>
-              </div>
+              <ServiceFlipCard title={service.title} description={service.description} />
             </Reveal>
           ))}
         </div>
