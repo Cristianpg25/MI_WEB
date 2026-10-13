@@ -35,8 +35,10 @@ export function ServiceFlipCard({ title, description }: ServiceFlipCardProps) {
           flipped && "[transform:rotateY(180deg)]"
         )}
       >
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-[var(--space-xs)] rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)] text-center transition-colors duration-[var(--duration-hover)] [backface-visibility:hidden] hover:border-border-visible">
-          <h3 className="type-h3 uppercase tracking-wide text-accent">{title}</h3>
+        <div className="group absolute inset-0 flex flex-col items-center justify-center gap-[var(--space-xs)] rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)] text-center transition-colors duration-[var(--duration-hover)] [backface-visibility:hidden] hover:border-border-visible">
+          <h3 className="type-h3 uppercase tracking-wide text-accent [text-shadow:0_0_18px_currentColor] transition-[text-shadow] duration-[var(--duration-hover)] group-hover:[text-shadow:0_0_10px_currentColor,0_0_32px_currentColor]">
+            {title}
+          </h3>
           <span className="h-px w-10 bg-border-visible" aria-hidden="true" />
           <RotateCw
             className="absolute bottom-[var(--space-s)] right-[var(--space-s)] h-4 w-4 text-text-tertiary"

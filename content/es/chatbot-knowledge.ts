@@ -31,14 +31,13 @@ export function buildKnowledgeBase(): string {
     .map((o) => `P: ${o.question}\nR: ${o.answer}`)
     .join("\n\n");
 
-  const casesBlock = `Ejemplo ilustrativo (no es un caso real de cliente, es una ilustración del tipo de coste que resolvemos): ${cases.intro} Cifras ilustrativas: ${cases.stats
+  const casesBlock = `Caso de uso (no es un caso real de cliente, es una ilustración del tipo de coste que resolvemos): ${cases.intro} Cifras ilustrativas: ${cases.stats
     .map((s) => `${s.value} ${s.label}`)
-    .join(" · ")}. ${cases.outcome}`;
+    .join(" · ")}`;
 
   return [
     `## Servicios que ofrecemos\n${servicesBlock}`,
     `## Las siete capacidades del sistema\n${capabilitiesBlock}`,
-    `## Cierre de capacidades\n${capabilities.closingStatement}`,
     `## Metodología de trabajo (cinco fases)\n${methodologyBlock}`,
     `## Principios de confianza\n${trustBlock}`,
     `## Objeciones frecuentes ya resueltas en la web\n${objectionsBlock}`,

@@ -78,10 +78,6 @@ export function Cases() {
             })}
           </div>
         </Reveal>
-
-        <Reveal>
-          <p className="type-h4 max-w-2xl text-text-secondary">{cases.outcome}</p>
-        </Reveal>
       </Container>
     </section>
   );

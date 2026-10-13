@@ -135,10 +135,6 @@ export function Capabilities() {
             })}
           </div>
         </Reveal>
-
-        <Reveal className="w-full">
-          <p className="type-h4 max-w-2xl text-text-secondary">{capabilities.closingStatement}</p>
-        </Reveal>
       </Container>
     </section>
   );

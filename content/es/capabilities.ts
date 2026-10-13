@@ -1,8 +1,5 @@
 export const capabilities = {
   sectionTitle: "Esto es lo que hace posible la transformación.",
-  // Cierre drásticamente acortado a petición directa del cliente (el
-  // original listaba las siete capacidades otra vez, demasiado largo).
-  closingStatement: "Siete capacidades. Una sola empresa, funcionando como sistema.",
   items: [
     {
       id: "responde-sola",

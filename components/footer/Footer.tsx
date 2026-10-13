@@ -9,67 +9,63 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-border-subtle bg-bg-secondary">
-      <div className="pointer-events-none absolute inset-0 opacity-30">
-        <NodeNetwork variant="stable" nodeCount={24} seed={99} />
+      <div className="pointer-events-none absolute inset-0 opacity-20">
+        <NodeNetwork variant="stable" nodeCount={16} seed={99} />
       </div>
 
-      <Container className="relative grid gap-[var(--space-xl)] py-[var(--space-2xl)] tablet:grid-cols-2 desktop:grid-cols-4">
-        <div className="flex flex-col gap-[var(--space-s)]">
-          <span className="type-h4 text-text-primary">{siteConfig.brandName}</span>
-          <p className="type-small max-w-xs text-text-secondary">{footer.tagline}</p>
+      <Container className="relative flex flex-col gap-[var(--space-m)] py-[var(--space-l)]">
+        <div className="flex flex-col gap-[var(--space-m)] tablet:flex-row tablet:items-start tablet:justify-between">
+          <div className="flex flex-col gap-[var(--space-2xs)]">
+            <span className="type-h4 text-text-primary">{siteConfig.brandName}</span>
+            <p className="type-small max-w-xs text-text-secondary">{footer.tagline}</p>
+          </div>
+
+          <nav className="flex flex-wrap gap-x-[var(--space-m)] gap-y-[var(--space-2xs)]" aria-label="Navegación">
+            {footer.navLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="type-small text-text-secondary transition-colors hover:text-text-primary"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
         </div>
 
-        <nav className="flex flex-col gap-[var(--space-xs)]" aria-label="Navegación">
-          <span className="type-eyebrow text-text-tertiary">Navegación</span>
-          {footer.navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="type-small text-text-secondary transition-colors hover:text-text-primary"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <div className="flex flex-col gap-[var(--space-xs)] border-t border-border-subtle pt-[var(--space-s)] tablet:flex-row tablet:items-center tablet:justify-between">
+          <p className="type-caption text-text-tertiary">
+            © {year} {siteConfig.brandName}. Todos los derechos reservados.
+          </p>
 
-        <nav className="flex flex-col gap-[var(--space-xs)]" aria-label="Legal">
-          <span className="type-eyebrow text-text-tertiary">Legal</span>
-          {footer.legalLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="type-small text-text-secondary transition-colors hover:text-text-primary"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="flex flex-col gap-[var(--space-xs)]">
-          <span className="type-eyebrow text-text-tertiary">Contacto</span>
-          <a
-            href={`mailto:${siteConfig.contactEmail}`}
-            className="type-small text-text-secondary transition-colors hover:text-text-primary"
-          >
-            {siteConfig.contactEmail}
-          </a>
-          {siteConfig.linkedinUrl && (
+          <div className="flex flex-wrap items-center gap-x-[var(--space-m)] gap-y-[var(--space-2xs)]">
+            {footer.legalLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="type-caption text-text-tertiary transition-colors hover:text-text-primary"
+              >
+                {link.label}
+              </Link>
+            ))}
             <a
-              href={siteConfig.linkedinUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="type-small text-text-secondary transition-colors hover:text-text-primary"
+              href={`mailto:${siteConfig.contactEmail}`}
+              className="type-caption text-text-tertiary transition-colors hover:text-text-primary"
             >
-              LinkedIn
+              {siteConfig.contactEmail}
             </a>
-          )}
+            {siteConfig.linkedinUrl && (
+              <a
+                href={siteConfig.linkedinUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="type-caption text-text-tertiary transition-colors hover:text-text-primary"
+              >
+                LinkedIn
+              </a>
+            )}
+          </div>
         </div>
-      </Container>
-
-      <Container className="relative border-t border-border-subtle py-[var(--space-m)]">
-        <p className="type-caption text-text-tertiary">
-          © {year} {siteConfig.brandName}. Todos los derechos reservados.
-        </p>
       </Container>
     </footer>
   );
