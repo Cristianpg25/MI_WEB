@@ -1,8 +1,8 @@
 export const capabilities = {
   sectionTitle: "Esto es lo que hace posible la transformación.",
-  // Cierre actualizado — Anexo B: de seis a siete capacidades.
-  closingStatement:
-    "No son ocho servicios distintos: es una empresa que responde más rápido, trabaja de forma autónoma, conecta su información, decide mejor, atrae más clientes, crece sin multiplicar su complejidad y cuenta con las herramientas exactas que necesita.",
+  // Cierre drásticamente acortado a petición directa del cliente (el
+  // original listaba las siete capacidades otra vez, demasiado largo).
+  closingStatement: "Siete capacidades. Una sola empresa, funcionando como sistema.",
   items: [
     {
       id: "responde-sola",

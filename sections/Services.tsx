@@ -18,7 +18,6 @@ export function Services() {
         <Reveal className="flex flex-col gap-[var(--space-s)]">
           <Eyebrow>{services.eyebrow}</Eyebrow>
           <h2 className="type-h1 max-w-2xl text-text-primary">{services.sectionTitle}</h2>
-          <p className="type-body-lg max-w-xl text-text-secondary">{services.subtitle}</p>
         </Reveal>
 
         <div className="grid gap-[var(--space-m)] tablet:grid-cols-2 desktop:grid-cols-3">

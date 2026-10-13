@@ -13,9 +13,7 @@
  */
 export const services = {
   eyebrow: "Servicios",
-  sectionTitle: "Así ponemos esto en marcha.",
-  subtitle:
-    "Cada capacidad que vas a ver a lo largo de la página se apoya en un servicio concreto. Esto es exactamente lo que hacemos por tu negocio.",
+  sectionTitle: "Lo que hacemos por tu negocio.",
   items: [
     {
       id: "atencion-automatizada",
@@ -48,10 +46,10 @@ export const services = {
         "Organizamos tus datos para que decidir sea más rápido y con más certeza, no más intuición.",
     },
     {
-      id: "visibilidad-seo",
-      title: "Visibilidad y SEO",
+      id: "publicidad-online",
+      title: "Publicidad Online",
       description:
-        "Más oportunidades entrando desde donde tus clientes ya están buscando, sin depender de la suerte.",
+        "Campañas de publicidad online dirigidas a tu cliente ideal, para que entren clientes nuevos de forma constante — no solo cuando te acuerdas de invertir.",
     },
     {
       id: "software-a-medida",

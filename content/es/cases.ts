@@ -16,8 +16,16 @@ export const cases = {
   stats: [
     { value: "+300", label: "PDFs al mes" },
     { value: "~30h", label: "perdidas copiando datos" },
-    { value: "~750€", label: "coste mensual estimado" },
+    { value: "~450€", label: "coste mensual estimado" },
   ],
   outcome:
     "Leer esos PDFs, extraer los datos y volcarlos solos es exactamente el tipo de proceso que automatizamos.",
+  // Flujo del proceso automatizado — se lee de derecha a izquierda (a
+  // petición directa), icono + etiqueta muy breve por paso.
+  flow: [
+    { icon: "mail", label: "Llega el PDF" },
+    { icon: "scan-text", label: "El sistema lo lee" },
+    { icon: "database", label: "Extrae los datos" },
+    { icon: "check-circle", label: "Los vuelca solo" },
+  ],
 } as const;
