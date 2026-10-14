@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, Phone, Send, X } from "lucide-react";
+import { Send, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -51,6 +51,17 @@ export function ChatWidget() {
     );
     observer.observe(target);
     return () => observer.disconnect();
+  }, []);
+
+  // Permite que otros componentes (p. ej. el botón "Hablemos" del Hero)
+  // abran el chat directamente, sin depender de haber llegado a Capacidades.
+  useEffect(() => {
+    function handleOpenRequest() {
+      setVisible(true);
+      setOpen(true);
+    }
+    window.addEventListener("open-chat-widget", handleOpenRequest);
+    return () => window.removeEventListener("open-chat-widget", handleOpenRequest);
   }, []);
 
   useEffect(() => {
@@ -177,41 +188,18 @@ export function ChatWidget() {
 
       <AnimatePresence>
         {!open && (
-          <motion.div
-            className="flex w-[280px] flex-col gap-[var(--space-s)] rounded-card bg-white p-[var(--space-s)] shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
-            initial={{ opacity: 0, y: 16, scale: 0.98 }}
+          <motion.button
+            type="button"
+            aria-label="Abrir chat"
+            onClick={() => setOpen(true)}
+            className="h-16 w-16 overflow-hidden rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-transform duration-[var(--duration-hover)] hover:scale-105"
+            initial={{ opacity: 0, y: 16, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            exit={{ opacity: 0, y: 16, scale: 0.9 }}
             transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
           >
-            <div className="flex items-center gap-[var(--space-xs)]">
-              <Image
-                src="/mascot.png"
-                alt=""
-                width={44}
-                height={44}
-                className="h-11 w-11 shrink-0 rounded-full"
-              />
-              <span className="type-label text-black">¿Necesitas ayuda?</span>
-            </div>
-
-            <div className="flex items-center gap-[var(--space-xs)]">
-              <CalendlyPopupTrigger
-                label="Hablemos ahora"
-                variant="primary"
-                icon={<Phone className="h-4 w-4" aria-hidden="true" />}
-                className="flex-1 justify-center rounded-pill bg-black px-[var(--space-m)] py-[var(--space-xs)] text-white hover:bg-black hover:text-white hover:shadow-none"
-              />
-              <button
-                type="button"
-                aria-label="Abrir chat"
-                onClick={() => setOpen(true)}
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white transition-opacity hover:opacity-80"
-              >
-                <MessageCircle className="h-5 w-5" aria-hidden="true" />
-              </button>
-            </div>
-          </motion.div>
+            <Image src="/mascot.png" alt="Abrir chat" width={64} height={64} className="h-full w-full object-cover" />
+          </motion.button>
         )}
       </AnimatePresence>
     </div>

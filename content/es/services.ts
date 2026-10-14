@@ -12,12 +12,12 @@
  * Diccionario de traducción (Cap. 7.2) — resultado de negocio, no jerga.
  */
 export const services = {
-  eyebrow: "Servicios",
-  sectionTitle: "Lo que hacemos por tu negocio.",
+  eyebrow: "Nuestros",
+  sectionTitle: "Servicios",
   items: [
     {
       id: "atencion-automatizada",
-      title: "Atención y chatbots inteligentes",
+      title: "Chatbot y Agentes",
       description:
         "Un asistente que responde a tus clientes a cualquier hora, entrenado con la información real de tu negocio — nunca una conversación genérica.",
     },

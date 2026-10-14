@@ -2,17 +2,12 @@ import Link from "next/link";
 import { footer } from "@/content/es/footer";
 import { siteConfig } from "@/lib/site-config";
 import { Container } from "@/components/ui/Container";
-import { NodeNetwork } from "@/components/animations/NodeNetwork";
 
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative overflow-hidden border-t border-border-subtle bg-bg-secondary">
-      <div className="pointer-events-none absolute inset-0 opacity-20">
-        <NodeNetwork variant="stable" nodeCount={16} seed={99} />
-      </div>
-
+    <footer className="relative border-t border-border-subtle bg-bg-secondary">
       <Container className="relative flex flex-col gap-[var(--space-m)] py-[var(--space-l)]">
         <div className="flex flex-col gap-[var(--space-m)] tablet:flex-row tablet:items-start tablet:justify-between">
           <div className="flex flex-col gap-[var(--space-2xs)]">

@@ -1,34 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { hero } from "@/content/es/hero";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { NodeNetwork, type NodeNetworkVariant } from "@/components/animations/NodeNetwork";
 import { DURATION, EASE } from "@/lib/motion";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
 /**
- * Hero — Living System Hero (Dossier Cap. 8 / Blueprint 4.1).
- * El fondo ya está vivo al cargar (variante "seed", el sistema "aprendiendo")
- * y se asienta en "connected" tras la entrada. Titular con mask-reveal
- * palabra a palabra; la palabra clave del Cap. 20 en Instrument Serif
- * itálica + gradiente. CTA retrasado ~1.8s para no competir con la lectura.
+ * Hero — Living System Hero (Dossier Cap. 8 / Blueprint 4.1). Titular con
+ * mask-reveal palabra a palabra; la palabra clave del Cap. 20 en Instrument
+ * Serif itálica + gradiente. Fondo: solo la textura de ruido global del
+ * body (Cap. 22.7) — sin animación propia, a petición directa del cliente
+ * (se retiró el fondo de nodos de todas las secciones).
  */
 export function Hero() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [variant, setVariant] = useState<NodeNetworkVariant>("seed");
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => setVariant("connected"), 1800);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end start"] });
-  const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
 
   const words = hero.title.split(" ");
   const initialProp = prefersReducedMotion ? false : undefined;
@@ -36,16 +25,12 @@ export function Hero() {
   return (
     <section
       id="hero"
-      ref={sectionRef}
       // pt reserva espacio para la navbar fija: sin esto, en viewports bajos
       // (~700-760px, portátiles habituales) el titular queda pegado al
       // header en vez de sentirse centrado — Cap. 25, probar en el caso
       // más restrictivo, no en el más cómodo.
       className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-bg-primary pt-[var(--space-2xl)]"
     >
-      <motion.div className="absolute inset-0" style={prefersReducedMotion ? undefined : { y: bgY }}>
-        <NodeNetwork variant={variant} interactive />
-      </motion.div>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--bg-primary)_78%)]" />
 
       <Container className="relative z-[var(--z-content)] flex flex-col items-center gap-[var(--space-l)] text-center">
@@ -83,12 +68,23 @@ export function Hero() {
         </motion.p>
 
         <motion.div
+          className="flex flex-wrap items-center justify-center gap-[var(--space-s)]"
           initial={initialProp ?? { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: DURATION.reveal, ease: EASE.outSoft, delay: 1.8 }}
         >
-          <Button href={hero.cta.href} variant="primary">
-            {hero.cta.label}
+          <Button
+            type="button"
+            variant="primary"
+            onClick={() => window.dispatchEvent(new Event("open-chat-widget"))}
+            className="bg-[image:var(--gradient-primary)] text-white hover:text-white hover:shadow-[0_0_28px_var(--accent-glow)]"
+          >
+            <MessageCircle className="h-4 w-4" aria-hidden="true" />
+            {hero.primaryCta.label}
+          </Button>
+          <Button href={hero.secondaryCta.href} variant="secondary">
+            {hero.secondaryCta.label}
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         </motion.div>
       </Container>

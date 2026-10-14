@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { transformation } from "@/content/es/transformation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { NodeNetwork } from "@/components/animations/NodeNetwork";
 import { useIsDesktop, usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { DURATION } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -72,9 +71,6 @@ function TransformationDesktop() {
     // desplazamiento horizontal sin alargar la página innecesariamente.
     <div ref={wrapperRef} className="relative" style={{ height: `${PHASES.length * 55}vh` }}>
       <div ref={panelRef} className="sticky top-0 h-screen overflow-hidden">
-        <div className="absolute inset-0 opacity-70">
-          <NodeNetwork fromVariant="fragmenting" toVariant="stable" progress={effectiveProgress} />
-        </div>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--bg-primary)_85%)]" />
 
         <div
@@ -128,13 +124,8 @@ function TransformationMobile() {
           margin="0px 0px -15% 0px"
         >
           <div className="relative overflow-hidden rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)]">
-            <div className="absolute inset-0 opacity-40">
-              <NodeNetwork variant={phase.variant} seed={200 + i} nodeCount={24} />
-            </div>
-            <div className="relative">
-              <span className="type-eyebrow text-accent">{phase.title}</span>
-              <p className="type-h3 mt-[var(--space-s)] text-text-primary">{phase.message}</p>
-            </div>
+            <span className="type-eyebrow text-accent">{phase.title}</span>
+            <p className="type-h3 mt-[var(--space-s)] text-text-primary">{phase.message}</p>
           </div>
         </Reveal>
       ))}

@@ -4,7 +4,7 @@ export const hero = {
   // permitido para cursiva editorial: productividad, tiempo, crecimiento,
   // transformación, sistema, inteligencia).
   accentWord: "Inteligencia",
-  subtitle:
-    "Solo que lo hace en forma de tiempo perdido, procesos manuales y errores que nadie está contando. Nosotros hacemos visible ese coste oculto.",
-  cta: { label: "Descubrir por qué", href: "#problema" },
+  subtitle: "Lo paga en tiempo perdido, procesos manuales y errores que nadie cuenta — nosotros lo hacemos visible.",
+  primaryCta: { label: "Hablemos" },
+  secondaryCta: { label: "Nuestros Servicios", href: "#servicios" },
 } as const;

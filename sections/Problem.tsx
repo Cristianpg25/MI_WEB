@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { problem } from "@/content/es/problem";
 import { Container } from "@/components/ui/Container";
-import { NodeNetwork } from "@/components/animations/NodeNetwork";
 import { usePrefersReducedMotion } from "@/hooks/useMediaQuery";
 import { cn } from "@/lib/utils";
 
@@ -89,9 +88,6 @@ export function Problem() {
   return (
     <section id="problema" ref={wrapperRef} className="relative h-[200vh] bg-bg-primary">
       <div ref={panelRef} className="sticky top-0 flex h-screen flex-col overflow-hidden">
-        <div className="absolute inset-0">
-          <NodeNetwork fromVariant="connected" toVariant="fragmenting" progress={effectiveProgress} />
-        </div>
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,var(--bg-primary)_82%)]" />
 
         <Container className="relative z-[var(--z-content)] flex h-full flex-col justify-between pb-[var(--space-m)] pt-[var(--space-2xl)]">
