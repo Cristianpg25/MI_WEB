@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { NodeNetwork } from "@/components/animations/NodeNetwork";
 import { useIsDesktop, usePrefersReducedMotion } from "@/hooks/useMediaQuery";
+import { DURATION } from "@/lib/motion";
 import { cn } from "@/lib/utils";
 
 if (typeof window !== "undefined") {
@@ -117,7 +118,15 @@ function TransformationMobile() {
   return (
     <Container className="flex flex-col gap-[var(--space-2xl)] py-[var(--space-2xl)]">
       {PHASES.map((phase, i) => (
-        <Reveal key={phase.id} delay={i * 0.05} x={-64} y={0}>
+        <Reveal
+          key={phase.id}
+          delay={i * 0.05}
+          duration={DURATION.revealMajor}
+          x="-60%"
+          y={0}
+          amount={0.4}
+          margin="0px 0px -15% 0px"
+        >
           <div className="relative overflow-hidden rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)]">
             <div className="absolute inset-0 opacity-40">
               <NodeNetwork variant={phase.variant} seed={200 + i} nodeCount={24} />

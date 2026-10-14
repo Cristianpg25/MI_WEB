@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
+import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, Phone, Send, Sparkles, X } from "lucide-react";
+import { MessageCircle, Phone, Send, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -105,7 +106,16 @@ export function ChatWidget() {
             transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
           >
             <div className="flex items-center justify-between border-b border-border-subtle px-[var(--space-m)] py-[var(--space-s)]">
-              <span className="type-label text-text-primary">Asistente de {siteConfig.brandName}</span>
+              <div className="flex items-center gap-[var(--space-xs)]">
+                <Image
+                  src="/mascot.png"
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 shrink-0 rounded-full"
+                />
+                <span className="type-label text-text-primary">Asistente de {siteConfig.brandName}</span>
+              </div>
               <button
                 type="button"
                 aria-label="Cerrar chat"
@@ -175,10 +185,13 @@ export function ChatWidget() {
             transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
           >
             <div className="flex items-center gap-[var(--space-xs)]">
-              {/* Placeholder — sustituir por la imagen de la mascota cuando llegue */}
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-deep to-accent-light text-white">
-                <Sparkles className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
-              </span>
+              <Image
+                src="/mascot.png"
+                alt=""
+                width={44}
+                height={44}
+                className="h-11 w-11 shrink-0 rounded-full"
+              />
               <span className="type-label text-black">¿Necesitas ayuda?</span>
             </div>
 
