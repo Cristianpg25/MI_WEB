@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { RotateCcw, RotateCw } from "lucide-react";
+import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface ServiceFlipCardProps {
@@ -14,9 +14,9 @@ interface ServiceFlipCardProps {
  * el servicio (como en divisualproject.com), la trasera revela la
  * descripción. Transform CSS puro, sin librería — la rotación es
  * contenido (texto distinto detrás), no decoración, así que se mantiene
- * también con reduced motion, solo sin la transición animada. El icono en
- * la esquina (en vez de un texto "toca para ver más") da la pista de que
- * se puede interactuar sin ocupar una línea de texto aparte.
+ * también con reduced motion, solo sin la transición animada. El indicador
+ * en la esquina (un + / − dentro de un círculo fino, sin texto) da la
+ * pista de que se puede interactuar sin ocupar una línea aparte.
  */
 export function ServiceFlipCard({ title, description }: ServiceFlipCardProps) {
   const [flipped, setFlipped] = useState(false);
@@ -36,24 +36,18 @@ export function ServiceFlipCard({ title, description }: ServiceFlipCardProps) {
         )}
       >
         <div className="group absolute inset-0 flex flex-col items-center justify-center gap-[var(--space-xs)] rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)] text-center transition-colors duration-[var(--duration-hover)] [backface-visibility:hidden] hover:border-border-visible">
-          <h3 className="type-h3 uppercase tracking-wide text-accent [text-shadow:0_0_18px_currentColor] transition-[text-shadow] duration-[var(--duration-hover)] group-hover:[text-shadow:0_0_10px_currentColor,0_0_32px_currentColor]">
-            {title}
-          </h3>
+          <h3 className="type-h3 uppercase tracking-wide text-accent">{title}</h3>
           <span className="h-px w-10 bg-border-visible" aria-hidden="true" />
-          <RotateCw
-            className="absolute bottom-[var(--space-s)] right-[var(--space-s)] h-4 w-4 text-text-tertiary"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
+          <span className="absolute bottom-[var(--space-s)] right-[var(--space-s)] flex h-7 w-7 items-center justify-center rounded-full border border-border-visible text-text-tertiary transition-colors duration-[var(--duration-hover)] group-hover:border-accent group-hover:text-accent">
+            <Plus className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+          </span>
         </div>
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-[var(--space-xs)] rounded-card border border-border-visible bg-bg-elevated p-[var(--space-l)] text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
+        <div className="group absolute inset-0 flex flex-col items-center justify-center gap-[var(--space-xs)] rounded-card border border-border-visible bg-bg-elevated p-[var(--space-l)] text-center [backface-visibility:hidden] [transform:rotateY(180deg)]">
           <p className="type-small text-text-secondary">{description}</p>
-          <RotateCcw
-            className="absolute bottom-[var(--space-s)] right-[var(--space-s)] h-4 w-4 text-text-tertiary"
-            strokeWidth={1.5}
-            aria-hidden="true"
-          />
+          <span className="absolute bottom-[var(--space-s)] right-[var(--space-s)] flex h-7 w-7 items-center justify-center rounded-full border border-border-visible text-text-tertiary transition-colors duration-[var(--duration-hover)] group-hover:border-accent group-hover:text-accent">
+            <Minus className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden="true" />
+          </span>
         </div>
       </div>
     </button>

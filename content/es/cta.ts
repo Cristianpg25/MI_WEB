@@ -4,7 +4,7 @@ export const cta = {
   subtitle:
     "Analizamos cómo trabaja tu empresa, identificamos los procesos que más tiempo consumen y calculamos lo que podrías recuperar. Sin compromiso, sin interrumpir tu actividad.",
   primaryCta: "Reservar mi diagnóstico",
-  secondaryCta: { label: "Ver un caso de uso primero", href: "#casos" },
+  secondaryCta: { label: "Ver qué hacemos primero", href: "#servicios" },
   trustIndicators: [
     "Primera reunión sin compromiso",
     "Diagnóstico adaptado a tu empresa",

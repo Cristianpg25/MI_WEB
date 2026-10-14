@@ -3,7 +3,6 @@ export const footer = {
   navLinks: [
     { label: "Servicios", href: "#servicios" },
     { label: "Capacidades", href: "#capacidades" },
-    { label: "Casos", href: "#casos" },
     { label: "Cómo trabajamos", href: "#metodologia" },
   ],
   legalLinks: [

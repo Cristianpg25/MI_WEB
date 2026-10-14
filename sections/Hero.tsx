@@ -92,22 +92,6 @@ export function Hero() {
           </Button>
         </motion.div>
       </Container>
-
-      <motion.div
-        className="absolute bottom-[var(--space-l)] left-1/2 z-[var(--z-content)] -translate-x-1/2"
-        aria-hidden="true"
-        initial={initialProp ?? { opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: DURATION.reveal, delay: 2.2 }}
-      >
-        <div className="h-8 w-5 rounded-pill border border-border-visible">
-          <motion.div
-            className="mx-auto mt-1.5 h-1.5 w-1 rounded-pill bg-accent"
-            animate={prefersReducedMotion ? undefined : { y: [0, 10, 0], opacity: [1, 0.3, 1] }}
-            transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </div>
-      </motion.div>
     </section>
   );
 }

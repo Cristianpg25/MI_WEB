@@ -1,14 +1,12 @@
 /**
- * Casos de Transformación — Dossier Cap. 12, reescrito por petición directa
- * del cliente: se sustituye el caso real (control de calidad) por un
- * ejemplo genérico, mucho más corto y gráfico. Importante: precisamente
- * por no ser un caso real verificado, la sección nunca afirma que lo sea
- * — el tag se eligió para sonar profesional sin mentir sobre su origen
- * (ver conversación: se descartó etiquetarlo como caso real de cliente
- * por riesgo de publicidad engañosa si alguna vez se pide verificarlo).
- * Mismo principio de honestidad que ya aplica al contador de la sección
- * Problema (Cap. 9): nunca presentar una cifra de ejemplo como si fuera un
- * dato real de cliente.
+ * Casos de Transformación — Dossier Cap. 12. La sección visible se
+ * eliminó por completo a petición directa del cliente (ver conversación:
+ * título, recuadro visual, tag, cifras y gráfico explicativo, todo
+ * fuera). Este contenido ya no se renderiza en ningún sitio: se conserva
+ * únicamente como base de conocimiento del chatbot. Importante: nunca fue
+ * (ni debe presentarse en el chatbot como) un caso real de cliente — es
+ * un ejemplo ilustrativo, mismo principio de honestidad que ya aplica al
+ * contador de la sección Problema (Cap. 9).
  */
 export const cases = {
   sectionTitle: "Así de rápido se acumula el coste de un proceso manual.",

@@ -34,18 +34,6 @@ export const services = {
         "Revisamos tus procesos y herramientas actuales para detectar dónde se pierde tiempo y dinero, y qué automatizar primero para notarlo antes.",
     },
     {
-      id: "analisis-ecommerce",
-      title: "Análisis e-commerce",
-      description:
-        "Analizamos tu tienda online — tráfico, conversión, catálogo — para encontrar qué está frenando las ventas y cómo corregirlo.",
-    },
-    {
-      id: "analisis-decisiones",
-      title: "Análisis y decisiones con IA",
-      description:
-        "Organizamos tus datos para que decidir sea más rápido y con más certeza, no más intuición.",
-    },
-    {
       id: "publicidad-online",
       title: "Publicidad Online",
       description:
