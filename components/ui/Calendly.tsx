@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { siteConfig } from "@/lib/site-config";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
@@ -58,13 +58,16 @@ interface CalendlyPopupTriggerProps {
   label: string;
   className?: string;
   variant?: "primary" | "secondary" | "tertiary";
+  /** Icono opcional antes del texto — p. ej. el teléfono del widget de chat. */
+  icon?: ReactNode;
 }
 
 /** CTA de navbar — popup, no saca al usuario del scroll narrativo. */
-export function CalendlyPopupTrigger({ label, className, variant = "secondary" }: CalendlyPopupTriggerProps) {
+export function CalendlyPopupTrigger({ label, className, variant = "secondary", icon }: CalendlyPopupTriggerProps) {
   if (!siteConfig.calendlyUrl) {
     return (
       <Button href={mailtoHref(siteConfig.bookingFallbackSubject)} variant={variant} className={className}>
+        {icon}
         {label}
       </Button>
     );
@@ -81,6 +84,7 @@ export function CalendlyPopupTrigger({ label, className, variant = "secondary" }
 
   return (
     <Button type="button" variant={variant} className={className} onClick={handleClick}>
+      {icon}
       {label}
     </Button>
   );

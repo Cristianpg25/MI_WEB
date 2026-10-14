@@ -56,7 +56,7 @@ function shouldSuggestBooking(reply: string): boolean {
 }
 
 export async function POST(req: NextRequest) {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENROUTER_API_KEY;
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "anonymous";
 
   let body: { messages?: ChatMessage[] };
@@ -80,14 +80,18 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${apiKey}`,
+        // Cabeceras recomendadas por OpenRouter para identificar la app en
+        // su dashboard — no son obligatorias para que la petición funcione.
+        "HTTP-Referer": siteConfig.domain,
+        "X-Title": siteConfig.brandName,
       },
       body: JSON.stringify({
-        model: process.env.OPENAI_CHAT_MODEL || "gpt-4o-mini",
+        model: process.env.OPENROUTER_CHAT_MODEL || "openai/gpt-4o-mini",
         temperature: 0.4,
         max_tokens: 300,
         messages: [
@@ -98,7 +102,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!response.ok) {
-      throw new Error(`OpenAI respondió ${response.status}`);
+      throw new Error(`OpenRouter respondió ${response.status}`);
     }
 
     const data = (await response.json()) as OpenAIChatResponse;

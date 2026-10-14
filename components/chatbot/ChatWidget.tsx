@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { MessageCircle, Send, X } from "lucide-react";
+import { MessageCircle, Phone, Send, Sparkles, X } from "lucide-react";
 import { siteConfig } from "@/lib/site-config";
 import { DURATION, EASE } from "@/lib/motion";
 import { cn } from "@/lib/utils";
@@ -165,17 +165,42 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      <motion.button
-        type="button"
-        aria-label={open ? "Cerrar asistente" : "Abrir asistente"}
-        onClick={() => setOpen((v) => !v)}
-        className="flex h-14 w-14 items-center justify-center rounded-pill border border-border-subtle bg-bg-elevated text-text-primary shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
-      >
-        {open ? <X className="h-5 w-5" aria-hidden="true" /> : <MessageCircle className="h-5 w-5" aria-hidden="true" />}
-      </motion.button>
+      <AnimatePresence>
+        {!open && (
+          <motion.div
+            className="flex w-[280px] flex-col gap-[var(--space-s)] rounded-card bg-white p-[var(--space-s)] shadow-[0_10px_30px_rgba(0,0,0,0.4)]"
+            initial={{ opacity: 0, y: 16, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 16, scale: 0.98 }}
+            transition={{ duration: DURATION.reveal, ease: EASE.outSoft }}
+          >
+            <div className="flex items-center gap-[var(--space-xs)]">
+              {/* Placeholder — sustituir por la imagen de la mascota cuando llegue */}
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-accent-deep to-accent-light text-white">
+                <Sparkles className="h-5 w-5" strokeWidth={1.5} aria-hidden="true" />
+              </span>
+              <span className="type-label text-black">¿Necesitas ayuda?</span>
+            </div>
+
+            <div className="flex items-center gap-[var(--space-xs)]">
+              <CalendlyPopupTrigger
+                label="Hablemos ahora"
+                variant="primary"
+                icon={<Phone className="h-4 w-4" aria-hidden="true" />}
+                className="flex-1 justify-center rounded-pill bg-black px-[var(--space-m)] py-[var(--space-xs)] text-white hover:bg-black hover:text-white hover:shadow-none"
+              />
+              <button
+                type="button"
+                aria-label="Abrir chat"
+                onClick={() => setOpen(true)}
+                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white transition-opacity hover:opacity-80"
+              >
+                <MessageCircle className="h-5 w-5" aria-hidden="true" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

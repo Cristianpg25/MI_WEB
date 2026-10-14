@@ -117,7 +117,7 @@ function TransformationMobile() {
   return (
     <Container className="flex flex-col gap-[var(--space-2xl)] py-[var(--space-2xl)]">
       {PHASES.map((phase, i) => (
-        <Reveal key={phase.id} delay={i * 0.05}>
+        <Reveal key={phase.id} delay={i * 0.05} x={-64} y={0}>
           <div className="relative overflow-hidden rounded-card border border-border-subtle bg-bg-secondary p-[var(--space-l)]">
             <div className="absolute inset-0 opacity-40">
               <NodeNetwork variant={phase.variant} seed={200 + i} nodeCount={24} />
